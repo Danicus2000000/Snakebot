@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using DSharpPlus.SlashCommands;
 using DSharpPlus.EventArgs;
 using Snakebot.Commands;
+using DSharpPlus.Entities;
 
 namespace Server_Servant
 {
@@ -30,7 +31,21 @@ namespace Server_Servant
             await discord.ConnectAsync();
             var slash = discord.UseSlashCommands();
             slash.RegisterCommands<slashcommands>();
+            discord.MessageCreated += Discord_MessageCreated;
             await Task.Delay(-1);
+        }
+
+        private static Task Discord_MessageCreated(DiscordClient client, MessageCreateEventArgs ctx)
+        {
+            if (ctx.Author.Id == 125253411812671488)
+            {
+                DiscordEmoji snek = DiscordEmoji.FromName(client, ":snake:");
+                ctx.Message.CreateReactionAsync(snek);
+                //DiscordEmoji trueSnek = DiscordEmoji.FromGuildEmote(client, 1033040242669797447);
+                //ctx.Message.CreateReactionAsync(trueSnek);
+
+            }
+            return Task.CompletedTask;
         }
 
         static async Task<configjson> getJSON()

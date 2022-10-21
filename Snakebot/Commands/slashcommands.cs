@@ -12,5 +12,12 @@ namespace Snakebot.Commands
             await ctx.Client.DisconnectAsync();//disconnect client
             Environment.Exit(0);//kill program
         }
+
+        [SlashCommand("Help", "Explains what the bot can do!")]
+        [SlashRequirePermissions(DSharpPlus.Permissions.Administrator)]
+        public async Task help(InteractionContext ctx)
+        {
+            await ctx.CreateResponseAsync("Snakebot has one command:\n/logout - (Requires Server Administrator) Logs out the bot and terminates the local client");//goodbye message
+        }
     }
 }
