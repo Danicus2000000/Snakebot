@@ -22,7 +22,7 @@ namespace Server_Servant
                 Token = config.token,
                 TokenType = TokenType.Bot,
                 Intents = DiscordIntents.AllUnprivileged,
-                MinimumLogLevel = LogLevel.Debug,
+                MinimumLogLevel = LogLevel.Information,
             });
             discord.Ready += onclientready;//adds client ready event
             discord.GuildAvailable += Client_GuildAvailable;//add guilds avilable event
